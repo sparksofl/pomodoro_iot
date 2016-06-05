@@ -34,7 +34,11 @@ module V1
     # PATCH/PUT /tasks/1.json
     def update
       @task = Task.find(params[:id])
-      Task.where(current: true)[0].update_attribute(:current, false) if Task.where(current: true)[0]
+
+      Task.where(current: true).each do |t|
+        t.update_attribute(:current, false)
+      end
+
       @task.update_attribute(:current, true)
 
       if @task.update(task_params)
@@ -51,7 +55,9 @@ module V1
     def destroy
       @task.destroy
 
-      head :no_content
+      @tasks = Task.all.order(current: :desc)
+
+      render json: @tasks, each_serializer: TasksSerializer
     end
 
     private
@@ -61,7 +67,7 @@ module V1
       end
 
       def task_params
-        params.require(:task).permit(:name, :user_id, :tags)
+        params.require(:task).permit(:name, :user_id, :estimate, :tags)
       end
   end
 end

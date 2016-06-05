@@ -1,4 +1,5 @@
 class PomodorosController < ApplicationController
+  skip_before_action :authenticate_user_from_token!
   before_action :set_pomodoro, only: [:show, :update, :destroy]
 
   # GET /pomodoros
@@ -18,7 +19,9 @@ class PomodorosController < ApplicationController
   # POST /pomodoros
   # POST /pomodoros.json
   def create
+    current_user = User.find(Timer.find_by(token: params[:token]).user_id)
     @pomodoro = Pomodoro.new(pomodoro_params)
+    @pomodoro.update_attribute(:task_id, current_user.tasks.where(current: true)[0].id)
 
     if @pomodoro.save
       render json: @pomodoro, status: :created, location: @pomodoro
@@ -54,6 +57,6 @@ class PomodorosController < ApplicationController
     end
 
     def pomodoro_params
-      params.require(:pomodoro).permit(:duration, :task_id)
+      params.permit(:duration)
     end
 end

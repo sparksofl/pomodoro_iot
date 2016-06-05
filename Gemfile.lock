@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/njh/ruby-mqtt.git
+  revision: b06dba3d3f24afd3b82a433023accc829df788fa
+  specs:
+    mqtt (0.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -156,6 +162,7 @@ DEPENDENCIES
   devise (~> 3.4.1)
   faker
   has_secure_token
+  mqtt!
   pg
   rack-cors
   rails (= 4.2.0)
