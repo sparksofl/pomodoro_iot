@@ -6,7 +6,7 @@ module V1
     # GET /tasks
     # GET /tasks.json
     def index
-      @tasks = Task.all
+      @tasks = Task.all.order(current: :desc)
 
       render json: @tasks, each_serializer: TasksSerializer
     end
@@ -34,9 +34,13 @@ module V1
     # PATCH/PUT /tasks/1.json
     def update
       @task = Task.find(params[:id])
+      Task.where(current: true)[0].update_attribute(:current, false) if Task.where(current: true)[0]
+      @task.update_attribute(:current, true)
 
       if @task.update(task_params)
-        head :no_content
+        @tasks = Task.all.order(current: :desc)
+
+        render json: @tasks, each_serializer: TasksSerializer
       else
         render json: @task.errors, status: :unprocessable_entity
       end

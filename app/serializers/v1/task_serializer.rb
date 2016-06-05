@@ -1,6 +1,6 @@
 module V1
   class TaskSerializer < ActiveModel::Serializer
-    attributes :id, :name, :user_id, :created_at, :tags
+    attributes :id, :name, :user_id, :created_at, :tags, :current
 
     def time_spent
       sum = 0
