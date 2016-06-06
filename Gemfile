@@ -16,5 +16,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'pry'
+
 gem 'has_secure_token'
 gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
