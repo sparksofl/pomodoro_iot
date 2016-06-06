@@ -6,7 +6,8 @@ module V1
     # GET /tasks
     # GET /tasks.json
     def index
-      @tasks = Task.all.order(current: :desc)
+      authenticate_user_from_token!
+      @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
 
       render json: @tasks, each_serializer: TasksSerializer
     end
@@ -22,6 +23,8 @@ module V1
     def create
       @task = Task.new(task_params)
       @task.update_attribute(:user_id, current_user.id)
+
+      @task.update_attribute(:current, true) if Task.all.count == 1
 
       if @task.save
         render json: @task, serializer: TaskSerializer
@@ -42,7 +45,8 @@ module V1
       @task.update_attribute(:current, true)
 
       if @task.update(task_params)
-        @tasks = Task.all.order(current: :desc)
+        authenticate_user_from_token!
+        @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
 
         render json: @tasks, each_serializer: TasksSerializer
       else
@@ -55,7 +59,8 @@ module V1
     def destroy
       @task.destroy
 
-      @tasks = Task.all.order(current: :desc)
+      authenticate_user_from_token!
+      @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
 
       render json: @tasks, each_serializer: TasksSerializer
     end
