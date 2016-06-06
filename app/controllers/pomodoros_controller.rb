@@ -25,10 +25,17 @@ class PomodorosController < ApplicationController
     @pomodoro.update_attribute(:task_id, current_user.tasks.where(current: true)[0].id)
 
     if @pomodoro.save
+      hello_world
       render json: @pomodoro, status: :created, location: @pomodoro
     else
       render json: @pomodoro.errors, status: :unprocessable_entity
     end
+  end
+
+  def hello_world
+    Pusher.trigger('test_channel', 'my_event', {
+        message: 'hello world'
+    })
   end
 
   # PATCH/PUT /pomodoros/1
@@ -53,11 +60,11 @@ class PomodorosController < ApplicationController
 
   private
 
-    def set_pomodoro
-      @pomodoro = Pomodoro.find(params[:id])
-    end
+  def set_pomodoro
+    @pomodoro = Pomodoro.find(params[:id])
+  end
 
-    def pomodoro_params
-      params.permit(:duration)
-    end
+  def pomodoro_params
+    params.permit(:duration)
+  end
 end
