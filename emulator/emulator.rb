@@ -1,10 +1,11 @@
 load 'dependencies.rb'
 url = 'test.mosquitto.org'
+N = 1
 
-5.times do
-  r = Random.new.rand(5..55)
+N.times do
+  duration = Random.new.rand(5..55)
   MQTT::Client.connect(url) do |c|
-    c.publish('data', r)
+    c.publish('data', duration)
   end
-  sleep 1
+  sleep 0
 end

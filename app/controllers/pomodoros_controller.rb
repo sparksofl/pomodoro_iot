@@ -21,13 +21,6 @@ class PomodorosController < ApplicationController
   def create
     current_user = User.find(Timer.find_by(token: params[:token]).user_id)
 
-    MQTT::Client.connect('test.mosquitto.org') do |c|
-      # If you pass a block to the get method, then it will loop
-      c.get('test') do |duration, token|
-        puts "#{topic}: #{message}"
-      end
-    end
-
     @pomodoro = Pomodoro.new(pomodoro_params)
     @pomodoro.update_attribute(:task_id, current_user.tasks.where(current: true)[0].id)
 

@@ -13,7 +13,7 @@ module V1
         sum += p.duration
       end
       from_time = Time.now
-      "spent #{distance_of_time_in_words(from_time, from_time + sum.seconds)}"
+      "spent #{distance_of_time_in_words(from_time, from_time + sum.minutes)}"
     end
   end
 end
