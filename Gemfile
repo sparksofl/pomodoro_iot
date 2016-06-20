@@ -7,7 +7,7 @@ gem 'devise', '~> 3.4.1'
 gem 'pg'
 gem 'rack-cors',            require: 'rack/cors'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'thin'
+gem 'thin' 
 
 group :development, :test do
   gem 'faker'
@@ -16,12 +16,9 @@ group :development, :test do
   gem 'spring'
 end
 
-gem 'uglifier', '>= 1.3.0'
-
 gem 'pry'
 
 gem 'has_secure_token'
 gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
 
 gem 'pusher'
-gem 'rails-observers'

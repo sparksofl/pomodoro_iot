@@ -1,7 +1,7 @@
 load 'dependencies.rb'
 require 'net/http'
 URL = 'test.mosquitto.org'
-LOCAL_URI = 'http://192.168.13.123:3000/pomodoros'
+LOCAL_URI = 'http://192.168.0.49:3000/pomodoros'
 
 def run
   print "Enter devise's serial number: "
