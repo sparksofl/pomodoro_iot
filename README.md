@@ -13,6 +13,4 @@ rails s
 
 ##Emulator
 
-```
-run from the irb the 'connector.rb' and after that 'emulator.rb' for each time the random generated pomodoro is needed
-```
+run from the ```irb``` the ```'connector.rb'``` and after that ```'emulator.rb'``` for each time the random generated pomodoro is needed
