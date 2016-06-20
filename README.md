@@ -13,4 +13,9 @@ rails s
 
 ##Emulator
 
-run from the ```irb``` the ```'connector.rb'``` and after that ```'emulator.rb'``` for each time the random generated pomodoro is needed
+implemented with the [CloudMQTT](https://www.cloudmqtt.com/)
+
+run ```irb``` from within ```emulator``` directory in two tabs
+ 1. load ```'connector.rb'``` in the first tab
+ 2. load ```'emulator.rb'``` in another tab for each time the random generated pomodoro is needed
+
