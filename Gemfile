@@ -7,7 +7,8 @@ gem 'devise', '~> 3.4.1'
 gem 'pg'
 gem 'rack-cors',            require: 'rack/cors'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'thin' 
+gem 'thin'
+gem 'uglifier'
 
 group :development, :test do
   gem 'faker'
