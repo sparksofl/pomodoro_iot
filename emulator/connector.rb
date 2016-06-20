@@ -9,7 +9,7 @@ def run
   Thread.new do
     MQTT::Client.connect(@conn_opts) do |c|
       puts "Connection established. Waiting for data..."
-      c.get('data') do |k,v|
+      c.get('data') do |_k,v|
         puts "Data is received. Sending to the server..."
         send_data v, token
         puts "Done. Waiting for data..."
@@ -23,7 +23,7 @@ def send_data(duration, token)
   uri = URI(LOCAL_URI)
   params = {'duration' => duration,
             'token' => token}
-  res = Net::HTTP.post_form(uri, params)
+  Net::HTTP.post_form(uri, params)
   sleep 0
 end
 

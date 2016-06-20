@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   has_many :pomodoros
 
   def current!
-    Task.where(current: true).each &:not_current!
+    Task.where(current: true).each(&:not_current!)
     self.update_attribute(:current, true)
   end
 
