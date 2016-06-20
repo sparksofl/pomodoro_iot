@@ -8,8 +8,6 @@ module V1
       @user = User.new user_params
 
       if @user.save
-        @user.timers << Timer.create
-        @user.timers.last.update_attribute(:user_id, @user.id)
         render json: @user, serializer: V1::SessionSerializer, root: nil
       else
         render json: { error: t('user_create_error') }, status: :unprocessable_entity

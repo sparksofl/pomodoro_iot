@@ -2,12 +2,12 @@ module V1
   class TasksController < ApplicationController
     skip_before_action :authenticate_user_from_token!, only: [:index, :show]
     before_action :set_task, only: [:show, :update, :destroy]
+    before_action :sorted_tasks, only: [:index, :update, :destroy]
 
     # GET /tasks
     # GET /tasks.json
     def index
       authenticate_user_from_token!
-      @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
 
       render json: @tasks, each_serializer: TasksSerializer
     end
@@ -24,7 +24,7 @@ module V1
       @task = Task.new(task_params)
       @task.update_attribute(:user_id, current_user.id)
 
-      @task.update_attribute(:current, true) if Task.all.count == 1
+      @task.current! if Task.all.count == 1
 
       if @task.save
         render json: @task, serializer: TaskSerializer
@@ -38,15 +38,10 @@ module V1
     def update
       @task = Task.find(params[:id])
 
-      Task.where(current: true).each do |t|
-        t.update_attribute(:current, false)
-      end
-
-      @task.update_attribute(:current, true)
+      @task.current!
 
       if @task.update(task_params)
         authenticate_user_from_token!
-        @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
 
         render json: @tasks, each_serializer: TasksSerializer
       else
@@ -73,6 +68,10 @@ module V1
 
       def task_params
         params.require(:task).permit(:name, :user_id, :estimate, :tags)
+      end
+
+      def sorted_tasks
+        @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
       end
   end
 end
