@@ -1,5 +1,5 @@
-languages:		
-- Ruby: true
+languages:
+  Ruby: true
 exclude_paths:
 - "Gemfile.lock"
 - "bin"
