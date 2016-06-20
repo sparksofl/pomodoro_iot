@@ -6,9 +6,13 @@
 
 ##Setup
 ```
-bundle install
-rake db:create
-rake db:migrate
-rake db:seed
+bundle
+rake db:create db:migrate db:seed
 rails s
+```
+
+##Emulator
+
+```
+run from the irb the 'connector.rb' and after that 'emulator.rb' for each time the random generated pomodoro is needed
 ```
