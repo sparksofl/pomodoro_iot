@@ -6,9 +6,16 @@
 
 ##Setup
 ```
-bundle install
-rake db:create
-rake db:migrate
-rake db:seed
+bundle
+rake db:create db:migrate db:seed
 rails s
 ```
+
+##Emulator
+
+implemented with the [CloudMQTT](https://www.cloudmqtt.com/)
+
+run ```irb``` from within ```emulator``` directory in two tabs
+ 1. load ```'connector.rb'``` in the first tab
+ 2. load ```'emulator.rb'``` in another tab for each time the random generated pomodoro is needed
+
