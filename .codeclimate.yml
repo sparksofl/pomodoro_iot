@@ -4,6 +4,8 @@ exclude_paths:
 - "Gemfile.lock"
 - "bin"
 engines:
+  languages:
+    Ruby: true
   duplication:
     enabled: true
     exclude_fingerprints:
