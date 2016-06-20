@@ -1,16 +1,5 @@
-engines:
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - ruby
-    exclude_fingerprints:
-    - d6c48ddee63a1c6bff6697e2b26acee0
-    - ddf7a8fb13a555a05723c4d2a25c7fdf
-    - 8653bb6705ca86ff172be4c25509a9d6
-    - 7957abd9de79ab206473abf4a4a9cdb1
-
 exclude_paths:
 - "Gemfile.lock"
 - "bin"
 - "db"
+- "test"
