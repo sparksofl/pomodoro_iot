@@ -23,3 +23,4 @@ gem 'has_secure_token'
 gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
 
 gem 'pusher'
+gem 'rails-observers'
