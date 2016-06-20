@@ -1,18 +1,19 @@
 load 'dependencies.rb'
 require 'net/http'
-URL = 'test.mosquitto.org'
-LOCAL_URI = 'http://192.168.0.49:3000/pomodoros'
+LOCAL_URI = 'http://localhost:3000/pomodoros'
 
 def run
   print "Enter devise's serial number: "
   token = gets.chomp.to_s
   puts "Running device with #{token} serial number..."
-  MQTT::Client.connect(URL) do |c|
-    puts "Connection established. Waiting for data..."
-    c.get('data') do |k,v|
-      puts "Data is received. Sending to the server..."
-      send_data v, token
-      puts "Done. Waiting for data..."
+  Thread.new do
+    MQTT::Client.connect(@conn_opts) do |c|
+      puts "Connection established. Waiting for data..."
+      c.get('data') do |k,v|
+        puts "Data is received. Sending to the server..."
+        send_data v, token
+        puts "Done. Waiting for data..."
+      end
     end
   end
 end
