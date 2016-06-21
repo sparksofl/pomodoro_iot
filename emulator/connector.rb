@@ -1,6 +1,6 @@
 load 'dependencies.rb'
 require 'net/http'
-LOCAL_URI = 'http://localhost:3000/pomodoros'
+LOCAL_URI = 'https://pomodoro-iot-api.herokuapp.com/pomodoros'
 
 def run
   print "Enter devise's serial number: "

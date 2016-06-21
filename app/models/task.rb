@@ -24,4 +24,8 @@ class Task < ActiveRecord::Base
     from_time = Time.now
     "spent #{distance_of_time_in_words(from_time, from_time + sum.minutes)}"
   end
+
+  def completed?
+    pomodoros.count == estimate
+  end
 end

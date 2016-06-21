@@ -22,6 +22,6 @@ module Small
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.initialize_on_precompile = false
 
-    config.active_record.observers = :pomodoro_observer, :user_observer
+    config.active_record.observers = :pomodoro_observer, :user_observer, :task_observer
   end
 end

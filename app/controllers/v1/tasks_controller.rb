@@ -1,6 +1,6 @@
 module V1
   class TasksController < ApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:index, :show]
+    skip_before_action :authenticate_user_from_token!, only: [:index, :show, :names]
     before_action :set_task, only: [:show, :update, :destroy]
     before_action :sorted_tasks, only: [:index, :update, :destroy]
 
@@ -58,6 +58,10 @@ module V1
       @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
 
       render json: @tasks, each_serializer: TasksSerializer
+    end
+
+    def names
+      render json: sorted_tasks.pluck(:name)
     end
 
     private
