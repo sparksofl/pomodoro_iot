@@ -7,7 +7,7 @@ module V1
     # GET /tasks
     # GET /tasks.json
     def index
-      # authenticate_user_from_token!
+      authenticate_user_from_token!
 
       render json: @tasks, each_serializer: TasksSerializer
     end
