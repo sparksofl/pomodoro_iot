@@ -75,7 +75,7 @@ module V1
       end
 
       def sorted_tasks
-        @tasks = current_user ? current_user.tasks.order(current: :desc) : Task.all.order(current: :desc)
+        @tasks = current_user ? User.first.tasks.order(current: :desc) : Task.all.order(current: :desc)
       end
   end
 end
