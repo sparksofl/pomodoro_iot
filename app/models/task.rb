@@ -26,6 +26,6 @@ class Task < ActiveRecord::Base
   end
 
   def completed?
-    pomodoros.count == estimate
+    pomodoros.count >= estimate
   end
 end
