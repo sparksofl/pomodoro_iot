@@ -61,7 +61,7 @@ module V1
     end
 
     def names
-      render json: sorted_tasks.pluck(:name)
+      render json: sorted_tasks.order(:name).to_json
     end
 
     private
