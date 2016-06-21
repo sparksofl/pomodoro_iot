@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :timers, except: [:new, :edit]
   devise_for :user, only: []
 
+  get 'tasks' => 'v1/tasks#index'
+
   namespace :v1, defaults: { format: :json } do
     resource :login, only: [:create], controller: :sessions
     resources :users, only: [:create]
